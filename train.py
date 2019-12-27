@@ -153,6 +153,12 @@ def main():
                                        transforms.Normalize([0.485, 0.456, 0.406], 
                                                             [0.229, 0.224, 0.225])])
 
+    valid_data_transforms  = transforms.Compose([transforms.Resize(256),
+                                          transforms.CenterCrop(224),
+                                          transforms.ToTensor(),
+                                          transforms.Normalize([0.485, 0.456, 0.406],
+                                                              [0.229, 0.224, 0.225])])
+
     test_data_transforms = transforms.Compose([transforms.Resize(256),
                                           transforms.CenterCrop(224),
                                           transforms.ToTensor(),
@@ -162,7 +168,7 @@ def main():
 
     train_data = datasets.ImageFolder(data_dir + '/train', transform=training_data_transforms)
     test_data = datasets.ImageFolder(data_dir + '/test', transform=test_data_transforms)
-    valid_data = datasets.ImageFolder(data_dir + '/valid', transform=test_data_transforms) 
+    valid_data = datasets.ImageFolder(data_dir + '/valid', transform=valid_data_transforms) 
 
 
     train_dataloaders = torch.utils.data.DataLoader(train_data, batch_size=64, shuffle=True)
